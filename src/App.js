@@ -1,39 +1,29 @@
-import { useEffect } from "react";
+import React from "react";
 import "./App.css";
+import { Link } from "react-router-dom";
 import WebsiteLayout from "./component/layout/layout";
-import { connect } from "react-redux";
-import ProductListItem from "./component/product-list-item/product-list-item";
-function App({ productList, catagoryId }) {
+function App({ }) {
   return (
-    <WebsiteLayout filter>
-      <main className="my-4">
-        <section className="mb-3">
-          <h1>Products</h1>
-          {Array.isArray(productList) ? (
-            <small className="small">items: {productList.filter((val) => val.categoryId == catagoryId || !catagoryId).length}</small>
-          ) : null}
-        </section>
-        <section className="row mx-md-4 mt-4">
-          {Array.isArray(productList) &&
-            productList
-              .filter((val) => val.categoryId == catagoryId || !catagoryId)
-              .map((val) => {
-                return (
-                  <div className="col-md-4 col-sm-6 col-12 mb-5 ">
-                    <ProductListItem model={val} />
-                  </div>
-                );
-              })}
-        </section>
+    <WebsiteLayout >
+      <main className="p-3 container">
+       <h2 >Home page</h2>
+       <ul className="mt-3 ml-4">
+        <li>
+        <Link to="/about" className='text-decoration-none text-dark'>
+           <p className="text-white">About Us</p>
+        </Link>
+        </li>
+        <li>
+        <Link to="/head-and-tail" className='text-decoration-none text-dark'>
+        <p className="text-white">Head and tail </p>
+        </Link>
+        </li>
+      </ul>
       </main>
+    
     </WebsiteLayout>
   );
 }
-const mapStateToProps = (state) => {
-  return {
-    productList: state.products,
-    catagoryId: state.catagoryId,
-  };
-};
 
-export default connect(mapStateToProps)(App);
+
+export default App;
